@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-canvas text-ink antialiased;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+  }
+
+  ::selection {
+    @apply bg-cue/30 text-ink;
+  }
+
+  .display {
+    @apply font-display leading-[0.98] tracking-[-0.035em];
+  }
+}
+
+@layer components {
+  .strip {
+    @apply relative rounded-[22px] border-2 border-ink bg-surface;
+    box-shadow: 5px 6px 0 #18203c;
+  }
+
+  .strip-label {
+    @apply font-mono text-sm font-medium uppercase tracking-[0.13em] text-ink/70;
+  }
+
+  .field {
+    @apply w-full rounded-xl border-2 border-ink bg-white px-4 py-3 text-base text-ink
+      outline-none transition placeholder:text-muted/60
+      focus:border-cue focus:ring-4 focus:ring-cue/20
+      disabled:opacity-60;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full border-2 border-ink bg-white px-3 py-1.5
+      font-mono text-sm font-medium uppercase tracking-[0.08em] text-ink;
+  }
+
+  .tally-live {
+    @apply border-ink bg-onair text-ink;
+  }
+
+  .tally-cue {
+    @apply border-ink bg-listener text-ink;
+  }
+
+  .notebook-page {
+    background-color: theme('colors.canvas');
+    background-image:
+      linear-gradient(90deg, transparent 0 54px, rgba(255, 102, 85, 0.20) 54px 56px, transparent 56px),
+      repeating-linear-gradient(0deg, transparent 0 31px, rgba(73, 104, 255, 0.10) 31px 32px);
+  }
+
+  .paper-panel {
+    @apply rounded-[24px] border-2 border-ink bg-white;
+    box-shadow: 5px 6px 0 #18203c;
+  }
+
+  .sticker {
+    @apply inline-flex rotate-[-3deg] items-center gap-2 rounded-full border-2 border-ink bg-listener px-4 py-2
+      text-sm font-extrabold uppercase tracking-[0.08em] text-ink;
+    box-shadow: 3px 4px 0 #18203c;
+  }
+
+  .focus-ring {
+    @apply outline-none focus-visible:ring-4 focus-visible:ring-cue/30 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas;
+  }
+
+  .landing-underline {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .landing-underline::after {
+    position: absolute;
+    right: -0.04em;
+    bottom: 0.02em;
+    left: -0.04em;
+    z-index: -1;
+    height: 0.16em;
+    border-radius: 9999px;
+    background: theme('colors.listener');
+    content: '';
+    transform: rotate(-1.2deg);
+  }
+
+  .landing-tech-underline {
+    color: theme('colors.ink');
+    font-weight: 800;
+    text-decoration-line: underline;
+    text-decoration-color: theme('colors.listener');
+    text-decoration-thickness: 0.24em;
+    text-underline-offset: -0.12em;
+    text-decoration-skip-ink: none;
+  }
+
+  .conversation-board::after {
+    position: absolute;
+    top: -42px;
+    right: -36px;
+    width: 120px;
+    height: 120px;
+    border: 18px solid rgb(73 104 255 / 0.12);
+    border-radius: 9999px;
+    content: '';
+  }
+
+  .conversation-role {
+    @apply relative min-h-[132px] rounded-[18px] border-2 p-3;
+  }
+
+  .role-icon {
+    @apply inline-flex h-9 w-9 items-center justify-center rounded-full border-2 border-ink text-ink;
+  }
+
+  .voice-pill {
+    @apply rounded-full border-2 px-2.5 py-1 font-mono text-[12px] font-medium uppercase tracking-[0.07em] text-ink/75;
+  }
+
+  .name-field-wrap {
+    @apply flex min-h-[58px] items-center gap-3 rounded-[16px] border-2 border-ink bg-listener/25 px-4 transition;
+    box-shadow: 3px 4px 0 #18203c;
+  }
+
+  .name-field-wrap:focus-within,
+  .name-field-wrap.is-ready {
+    @apply border-cue bg-white ring-4 ring-cue/15;
+  }
+}
+
+/* Level meter segments, lit from the bottom like a real VU ladder. */
+.meter-seg {
+  transition: opacity 90ms linear, background-color 90ms linear;
+}
+
+.rail-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(24, 32, 60, 0.35) transparent;
+}
+
+.rail-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.rail-scroll::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background-color: rgba(24, 32, 60, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

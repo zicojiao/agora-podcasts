@@ -1,0 +1,59 @@
+{
+  "name": "agora-podcasts",
+  "version": "0.1.0",
+  "description": "Interactive two-host AI podcasts powered by Gemini and Agora",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "doctor": "node scripts/doctor.mjs",
+    "dev": "next dev --webpack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "next typegen && tsc --noEmit",
+    "verify:api": "node --import tsx scripts/verify-contracts.mts",
+    "verify:analytics": "node --import tsx scripts/verify-analytics.mts",
+    "verify:chat": "node --import tsx scripts/verify-chat.mts",
+    "verify:layout": "node --import tsx scripts/verify-compact-stage.mts",
+    "verify:audio": "node --import tsx scripts/verify-speech-buffering.mts",
+    "verify:interruption": "node --import tsx scripts/verify-interruption-dialog.mts",
+    "verify:interruption-startup": "node --import tsx scripts/verify-interruption-startup.mts",
+    "verify:microphone": "node --import tsx scripts/verify-microphone-startup.mts",
+    "verify:replay": "node --import tsx scripts/verify-episode-replay.mts",
+    "verify:restart-controls": "node --import tsx scripts/verify-restart-controls.mts",
+    "verify:exit": "node --import tsx scripts/verify-room-exit.mts",
+    "verify:room-links": "node --import tsx scripts/verify-room-links.mts",
+    "verify:room-sync": "node --import tsx scripts/verify-room-sync.mts",
+    "verify:transcript-motion": "node --import tsx scripts/verify-transcript-motion.mts",
+    "smoke": "node --import tsx scripts/smoke.mts",
+    "verify": "pnpm run doctor && pnpm run lint && pnpm run typecheck && pnpm run verify:api && pnpm run verify:chat && pnpm run verify:layout && pnpm run verify:audio && pnpm run verify:interruption && pnpm run verify:interruption-startup && pnpm run verify:microphone && pnpm run verify:replay && pnpm run verify:restart-controls && pnpm run verify:exit && pnpm run verify:room-links && pnpm run verify:room-sync && pnpm run verify:transcript-motion && pnpm run verify:analytics && pnpm run build"
+  },
+  "dependencies": {
+    "@google/genai": "^2.24.0",
+    "agora-rtc-sdk-ng": "^4.24.3",
+    "agora-rtm": "^2.2.3",
+    "agora-token": "^2.0.5",
+    "autoprefixer": "^10.4.20",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.454.0",
+    "next": "^16.2.6",
+    "posthog-js": "^1.434.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.6",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.2",
+    "postcss": "^8.5.1",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.20.6",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.58.1"
+  }
+}
